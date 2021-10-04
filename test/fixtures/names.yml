@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nconst: MyString
+  primaryName: MyString
+  birthYear: MyString
+  deathYear: MyString
+  primaryProfession: MyString
+  knownForTitles: 
+
+two:
+  nconst: MyString
+  primaryName: MyString
+  birthYear: MyString
+  deathYear: MyString
+  primaryProfession: MyString
+  knownForTitles: 

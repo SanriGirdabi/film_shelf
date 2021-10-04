@@ -6,6 +6,9 @@ task :db_creator_custom do
   (0..332).each do |i|
 
     titles = JSON.parse(File.read("#{Dir.pwd}/public/title_jsons/title#{i}.json"))
+    titles.map do |title_hash|
+      title_hash['genres'] = title_hash['genres'].split(',').to_a
+    end
 
     client["titles#{i}"].insert_many(titles)
   end
