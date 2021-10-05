@@ -31,5 +31,22 @@ module Types
       end
       result
     end
+
+    # field :login, String, null: true, description: 'Login a user' do
+    #   argument :email, String, required: true
+    #   argument :password, String, required: true
+    # end
+
+    # def login(email:, password:)
+    #   if user = User.where(email: email).first&.authenticate(password)
+    #     user.sessions.create.key
+    #   end
+    # end
+
+    field :users, [Types::UserType], null: true 
+    
+    def users
+      User.all
+    end
   end
 end
