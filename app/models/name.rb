@@ -11,7 +11,8 @@ class Name
   field :knownForTitles, type: Array
 
   has_and_belongs_to_many :titles, primary_key: :tconst, foreign_key: :knownForTitles,
-  inverse_primary_key: :_id, inverse_foreign_key: :played_actors_id
+  # inverse_primary_key: :_id, inverse_foreign_key: :played_actors_id
+  inverse_of: nil
 
   def self.custom_set_collection(selected_collection)
     store_in collection: selected_collection
