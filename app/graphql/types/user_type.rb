@@ -8,6 +8,7 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: true
     field :_id, ID, null: true
     field :session_keys, [String], null: true
+    field :is_logged_in, Boolean, null: false
 
   end
 end

@@ -1,24 +1,33 @@
 class User
   include Mongoid::Document
-  
+
   field :email, type: String
   field :password, type: String
   field :created_at, type: Time
   field :updated_at, type: Time
   field :_id, type: BSON::ObjectId
   field :session_keys, type: Array, default: []
+  field :is_logged_in, type: Boolean, default: false
 
   after_create do
     client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users')
 
     a = client['users']
 
-    a.indexes.create_one({ email: 1 }, { unique: true, background: true, expire_after_seconds: 1})
-end
+    a.indexes.create_one({ email: 1 }, { unique: true, background: true, expire_after_seconds: 1 })
+  end
 
-has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user
+  def self.is_user_logged_in(session_key)
+    current_user(session_key)[:is_logged_in]
+  end
 
-  store_in collection: "users", database: "film_shelf_development"
+  def self.current_user(session_key)
+    User.find_by(session_keys: { "$all" => [session_key] })
+  end
+
+  has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user
+
+  store_in collection: 'users', database: 'film_shelf_development'
 
   include Mongoid::Timestamps
 end

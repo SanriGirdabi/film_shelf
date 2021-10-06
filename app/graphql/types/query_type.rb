@@ -74,14 +74,24 @@ module Types
 
       user_password_decyrpted = BCrypt::Password.new(answer[:password])
 
-
       if user_password_decyrpted == password && email == answer[:email]
         session = user.sessions.create
-        User.where(email: email).update({"$push" => {:session_keys => session.key } } )
+        User.where(email: email).update({ '$push' => { session_keys: session.key } })
+        User.where(email: email).update({ '$set' => { is_logged_in: true } })
         { session_key: session.key, is_logged_in: true, user_mail: answer[:email] }
       else
         { session_key: nil, is_logged_in: false, user_mail: answer[:email] }
       end
+    end
+
+    field :update_password, Types::UserType, null: true, description: 'Update a user password' do
+      argument :new_password, String, required: true
+      argument :session_key, String, required: true
+    end
+
+    def update_password(new_password:, session_key:)
+      User.current_user(session_key).update({ password: BCrypt::Password.create(new_password) }) if User.is_user_logged_in(session_key)
+      User.current_user(session_key)
     end
 
     field :users, [Types::UserType], null: true
