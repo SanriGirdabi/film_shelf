@@ -62,20 +62,23 @@ module Types
       result
     end
 
-    field :login, String, null: true, description: 'Login a user' do
+    field :login, Types::LoginType, null: true, description: 'Login a user' do
       argument :email, String, required: true
       argument :password, String, required: true
     end
 
     def login(email:, password:)
-
       answer = {}
-      user = User.find_by({email: email})
+      user = User.find_by({ email: email })
       User.where(email: email).map { |h| answer.merge!('password': h['password'], email: h['email']) }
-  
+
       user_password_decyrpted = BCrypt::Password.new(answer[:password])
 
-      user.sessions.create.key if user_password_decyrpted == password && email == answer[:email]
+      if user_password_decyrpted == password && email == answer[:email]
+        { session_key: user.sessions.create.key, is_logged_in: true, user_mail: answer[:email] }
+      else
+        { session_key: nil, is_logged_in: false, user_mail: answer[:email] }
+      end
     end
 
     field :users, [Types::UserType], null: true
