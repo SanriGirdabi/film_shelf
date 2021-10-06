@@ -74,8 +74,11 @@ module Types
 
       user_password_decyrpted = BCrypt::Password.new(answer[:password])
 
+
       if user_password_decyrpted == password && email == answer[:email]
-        { session_key: user.sessions.create.key, is_logged_in: true, user_mail: answer[:email] }
+        session = user.sessions.create
+        User.where(email: email).update({"$push" => {:session_keys => session.key } } )
+        { session_key: session.key, is_logged_in: true, user_mail: answer[:email] }
       else
         { session_key: nil, is_logged_in: false, user_mail: answer[:email] }
       end

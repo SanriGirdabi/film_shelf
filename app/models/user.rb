@@ -6,7 +6,7 @@ class User
   field :created_at, type: Time
   field :updated_at, type: Time
   field :_id, type: BSON::ObjectId
-  field :session_id, type: Float
+  field :session_keys, type: Array, default: []
 
   after_create do
     client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users')
@@ -16,7 +16,7 @@ class User
     a.indexes.create_one({ email: 1 }, { unique: true, background: true, expire_after_seconds: 1})
 end
 
-has_many :sessions, primary_key: :_id, foreign_key: :session_id
+has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user
 
   store_in collection: "users", database: "film_shelf_development"
 
