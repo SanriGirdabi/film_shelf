@@ -1,3 +1,6 @@
+require 'uri'
+require 'net/http'
+
 module Types
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
@@ -28,7 +31,7 @@ module Types
         break unless result.nil?
 
         Title.custom_set_collection("titles#{i}")
-        result = Title.find_by(tconst: tconst)
+        result = Title.where(tconst: tconst).first
       end
       result
     end
@@ -57,7 +60,7 @@ module Types
         break unless result.nil?
 
         Name.custom_set_collection("names#{i}")
-        result = Name.find_by(nconst: nconst)
+        result = Name.where(nconst: nconst).first
       end
       result
     end
@@ -90,7 +93,9 @@ module Types
     end
 
     def update_password(new_password:, session_key:)
-      User.current_user(session_key).update({ password: BCrypt::Password.create(new_password) }) if User.is_user_logged_in(session_key)
+      if User.is_user_logged_in(session_key)
+        User.current_user(session_key).update({ password: BCrypt::Password.create(new_password) })
+      end
       User.current_user(session_key)
     end
 
