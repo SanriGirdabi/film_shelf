@@ -1,6 +1,3 @@
-require 'uri'
-require 'net/http'
-
 module Types
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
@@ -16,7 +13,7 @@ module Types
       result = []
       (0..332).each do |i|
         Title.custom_set_collection("titles#{i}")
-        result.concat(Title.all.where(originalTitle: BSON::Regexp::Raw.new("^#{originalTitle}")))
+        result.concat(Title.where(originalTitle: BSON::Regexp::Raw.new("^#{originalTitle}")))
       end
       result
     end
