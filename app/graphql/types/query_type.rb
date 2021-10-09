@@ -11,9 +11,11 @@ module Types
 
     def titles(originalTitle:)
       result = []
-      (0..332).each do |i|
-        Title.custom_set_collection("titles#{i}")
-        result.concat(Title.where(originalTitle: BSON::Regexp::Raw.new("^#{originalTitle}")))
+      if originalTitle.length >= 4
+        (0..332).each do |i|
+          Title.custom_set_collection("titles#{i}")
+          result.concat(Title.where(originalTitle: BSON::Regexp::Raw.new("^#{originalTitle}")))
+        end
       end
       result
     end
@@ -40,9 +42,11 @@ module Types
 
     def names(primaryName:)
       result = []
-      (0..450).each do |i|
-        Name.custom_set_collection("names#{i}")
-        result.concat(Name.all.where(primaryName: BSON::Regexp::Raw.new("^#{primaryName}")))
+      if primaryName.length >= 3
+        (0..450).each do |i|
+          Name.custom_set_collection("names#{i}")
+          result.concat(Name.all.where(primaryName: BSON::Regexp::Raw.new("^#{primaryName}")))
+        end
       end
       result
     end
@@ -69,18 +73,23 @@ module Types
 
     def login(email:, password:)
       answer = {}
-      user = User.find_by({ email: email })
-      User.where(email: email).map { |h| answer.merge!('password': h['password'], email: h['email']) }
+      user = User.where({ email: email }).first
 
-      user_password_decyrpted = BCrypt::Password.new(answer[:password])
+      if user
+        User.where(email: email).map { |h| answer.merge!('password': h['password'], email: h['email']) }
 
-      if user_password_decyrpted == password && email == answer[:email]
+        user_password_decyrpted = BCrypt::Password.new(answer[:password])
+      end
+
+      if user && user_password_decyrpted == password && email == answer[:email]
         session = user.sessions.create
         User.where(email: email).update({ '$push' => { session_keys: session.key } })
         User.where(email: email).update({ '$set' => { is_logged_in: true } })
         { session_key: session.key, is_logged_in: true, user_mail: answer[:email] }
-      else
+      elsif user && user_password_decyrpted != password && email == answer[:email]
         { session_key: nil, is_logged_in: false, user_mail: answer[:email] }
+      else
+        { session_key: nil, is_logged_in: false, user_mail: nil }
       end
     end
 
@@ -100,6 +109,25 @@ module Types
 
     def users
       User.all
+    end
+
+    field :user, Types::UserType, null: true do
+      argument :email, String, required: true
+    end
+
+    def user(email:)
+      User.where(email: email).first
+    end
+
+    field :log_out, Types::UserType, null: true do
+      argument :session_key, String, required: true
+      argument :email, String, required: true
+    end
+
+    def log_out(session_key:, email:)
+      user = User.where(email: email).first
+      User.where(email: email).update({ '$set' => { is_logged_in: false } })
+      user.pull(session_keys: session_key)
     end
   end
 end

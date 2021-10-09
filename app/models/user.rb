@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
 
   field :email, type: String
   field :password, type: String
@@ -8,6 +9,9 @@ class User
   field :_id, type: BSON::ObjectId
   field :session_keys, type: Array, default: []
   field :is_logged_in, type: Boolean, default: false
+  field :favorite_movies, type: Array, default: []
+  field :followed_genres, type: Array, default: []
+  field :favorite_actors, type: Array, default: []
 
   after_create do
     client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users')
@@ -22,7 +26,7 @@ class User
   end
 
   def self.current_user(session_key)
-    User.find_by(session_keys: { "$all" => [session_key] })
+    User.where(session_keys: { "$all" => [session_key] }).first
   end
 
   has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user

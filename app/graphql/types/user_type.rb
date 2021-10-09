@@ -9,6 +9,9 @@ module Types
     field :_id, ID, null: true
     field :session_keys, [String], null: true
     field :is_logged_in, Boolean, null: false
+    field :favorite_movies, [String], null: true
+    field :followed_genres, [String], null: true
+    field :favorite_actors, [String], null: true
 
   end
 end

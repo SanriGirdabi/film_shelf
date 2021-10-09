@@ -1,6 +1,7 @@
 class Name
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Attributes::Dynamic
 
   field :_id, type: BSON::ObjectId
   field :nconst, type: String
@@ -10,9 +11,7 @@ class Name
   field :primaryProfession, type: String
   field :knownForTitles, type: Array
 
-  has_and_belongs_to_many :titles, primary_key: :tconst, foreign_key: :knownForTitles,
-  # inverse_primary_key: :_id, inverse_foreign_key: :played_actors_id
-  inverse_of: nil
+  has_and_belongs_to_many :titles, class_name: 'Title', inverse_of: :titles, primary_key: :nconst, foreign_key: :knownForTitles, autosave: true
 
   def self.custom_set_collection(selected_collection)
     store_in collection: selected_collection

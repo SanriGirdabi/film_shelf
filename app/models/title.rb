@@ -1,6 +1,7 @@
 class Title
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Attributes::Dynamic
 
   field :_id, type: BSON::ObjectId
   field :tconst, type: String
@@ -14,8 +15,7 @@ class Title
   field :genres, type: Array
   field :played_actors_id, type: Array
 
-  # has_and_belongs_to_many :names, primary_key: :_id, foreign_key: :played_actors_id,
-  # inverse_primary_key: :tconst, inverse_foreign_key: :knownForTitles
+  has_and_belongs_to_many :names, class_name: 'Name', inverse_of: :nil, primary_key: :tconst, foreign_key: :played_actors_id, autosave: true
 
   def self.custom_set_collection(selected_collection)
     store_in collection: selected_collection
