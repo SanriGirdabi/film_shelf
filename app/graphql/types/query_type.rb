@@ -129,5 +129,12 @@ module Types
       User.where(email: email).update({ '$set' => { is_logged_in: false } })
       user.pull(session_keys: session_key)
     end
+
+    field :featured_movies, [Types::TitleType], null: true
+
+    def featured_movies
+      Title.custom_set_collection("titles#{Random.rand(10)}")
+      Title.all.offset(3).limit(10).as_json
+    end
   end
 end
