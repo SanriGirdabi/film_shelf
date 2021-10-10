@@ -9,7 +9,6 @@ task :db_creator_custom => :environment do
     Title.custom_set_collection("titles#{i}")
     titles.map do |title_hash|
       title_hash['genres'] = title_hash['genres'].split(',').to_a
-      # Title.create(title_hash)
     end
 
     # client["titles#{i}"].insert_many(titles)
@@ -21,7 +20,6 @@ task :db_creator_custom => :environment do
     Name.custom_set_collection("names#{i}")
     names.map do |name_hash|
       name_hash['knownForTitles'] = name_hash['knownForTitles'].split(',').to_a
-      # Name.create(name_hash)
     end
 
     # client["names#{i}"].insert_many(names)
