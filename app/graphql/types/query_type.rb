@@ -20,17 +20,18 @@ module Types
       result
     end
 
-    field :title, Types::TitleType, description: 'Return one title due to search with tconst', null: false do
-      argument :tconst, String, required: true
+    field :title, [Types::TitleType], description: 'Return one title due to search with tconst', null: false do
+      argument :tconst, [String], required: true
     end
 
     def title(tconst:)
-      result = nil
+      result = []
       (0..332).each do |i|
-        break unless result.nil?
 
         Title.custom_set_collection("titles#{i}")
-        result = Title.where(tconst: tconst).first
+        tconst.each do |one_tconst|
+          result.concat(Title.where(tconst: one_tconst).as_json)
+        end
       end
       result
     end
