@@ -9,7 +9,8 @@ class Session
 
   belongs_to :user, inverse_of: :sesions
 
-  store_in collection: "sessions", database: "film_shelf_development"
+  store_in collection: "sessions", database: "film_shelf_development" if Rails.env.development?
+  store_in collection: 'sessions', database: 'film_shelf_production' if Rails.env.production?
 
   before_create do
     self.key = SecureRandom.hex(20)

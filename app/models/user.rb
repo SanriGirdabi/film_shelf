@@ -14,7 +14,9 @@ class User
   field :favorite_actors, type: Array, default: []
 
   after_create do
-    client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users')
+    client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users') if Rails.env.development?
+
+    client = Mongo::Client.new('mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority') if Rails.env.production?
 
     a = client['users']
 
@@ -31,7 +33,9 @@ class User
 
   has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user
 
-  store_in collection: 'users', database: 'film_shelf_development'
+  store_in collection: 'users', database: 'film_shelf_development' if Rails.env.development?
+
+  store_in collection: 'users', database: 'film_shelf_production' if Rails.env.production?
 
   include Mongoid::Timestamps
 end

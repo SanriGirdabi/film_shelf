@@ -14,6 +14,7 @@ class Name
   has_and_belongs_to_many :titles, class_name: 'Title', inverse_of: :titles, primary_key: :nconst, foreign_key: :knownForTitles, autosave: true
 
   def self.custom_set_collection(selected_collection)
-    store_in collection: selected_collection
+    store_in collection: selected_collection, database: 'film_shelf_development' if Rails.env.development?
+    store_in collection: selected_collection, database: 'film_shelf_production' if Rails.env.production?
   end
 end
