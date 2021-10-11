@@ -16,7 +16,7 @@ class User
   after_create do
     client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development', collection: 'users') if Rails.env.development?
 
-    client = Mongo::Client.new('mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority') if Rails.env.production?
+    client = Mongo::Client.new('://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority') if Rails.env.production?
 
     a = client['users']
 
