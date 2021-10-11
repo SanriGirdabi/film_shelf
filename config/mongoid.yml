@@ -183,4 +183,4 @@ production:
     default:
       database: film_shelf_production
       hosts:
-        - <%= ENV['MONGODB_URI'] %>
+        - mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority
