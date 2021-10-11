@@ -182,7 +182,7 @@ production:
   clients:
     default:
       hosts:
-        - '@cluster0.cat4j.mongodb.net/'
+        - cluster0.cat4j.mongodb.net/
       user: dbUser
       password: Xm!4NU$X*TkWEKe
       database: film_shelf_production
