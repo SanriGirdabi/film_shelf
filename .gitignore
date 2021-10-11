@@ -25,3 +25,4 @@
 /public/title_tsvs
 /public/name.basics.tsv
 /public/title.basics.tsv
+.env

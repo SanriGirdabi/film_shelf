@@ -183,4 +183,4 @@ production:
     default:
       database: film_shelf_production
       hosts:
-        - https://film-shelf.herokuapp.com/
+        - <%= ENV['MONGODB_URI'] %>
