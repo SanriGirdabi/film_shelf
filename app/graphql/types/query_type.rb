@@ -84,8 +84,8 @@ module Types
 
       if user && user_password_decyrpted == password && email == answer[:email]
         session = user.sessions.create
-        User.where(email: email).update({ '$push' => { session_keys: session.key } })
-        User.where(email: email).update({ '$set' => { is_logged_in: true } })
+        User.where(email: email).update({ '$push': { session_keys: session.key } })
+        User.where(email: email).update({ '$set': { is_logged_in: true } })
         { session_key: session.key, is_logged_in: true, user_mail: answer[:email] }
       elsif user && user_password_decyrpted != password && email == answer[:email]
         { session_key: nil, is_logged_in: false, user_mail: answer[:email] }
@@ -127,7 +127,7 @@ module Types
 
     def log_out(session_key:, email:)
       user = User.where(email: email).first
-      User.where(email: email).update({ '$set' => { is_logged_in: false } })
+      User.where(email: email).update({ '$set': { is_logged_in: false } })
       user.pull(session_keys: session_key)
     end
 

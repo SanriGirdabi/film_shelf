@@ -26,7 +26,4 @@
 /public/name.basics.tsv
 /public/title.basics.tsv
 .env
-/lib/tasks/converter.rake
-/lib/tasks/converter2.rake
-/lib/tasks/db_creator.rake
-/lib/tasks/title_modifier.rake
+

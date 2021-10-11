@@ -8,9 +8,9 @@ class Mutations::AddToFavorites < Mutations::BaseMutation
 
   def resolve(session_key:, use_case:, result:, email:)
     if User.is_user_logged_in(session_key)
-      User.where(email: email).update({ '$push' => { use_case.to_sym => result } }) unless use_case == 'followed_genres'
+      User.where(email: email).update({ '$push': { use_case.to_sym => result } }) unless use_case == 'followed_genres'
       if use_case == 'followed_genres' && User.where(email: email).where(followed_genres: result).to_a.empty?
-        User.where(email: email).update({ '$push' => { use_case.to_sym => result } })
+        User.where(email: email).update({ '$push': { use_case.to_sym => result } })
       end
     end
     User.current_user(session_key)

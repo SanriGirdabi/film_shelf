@@ -28,7 +28,7 @@ class User
   end
 
   def self.current_user(session_key)
-    User.where(session_keys: { "$all" => [session_key] }).first
+    User.where(session_keys: { "$all": [session_key] }).first
   end
 
   has_many :sessions, primary_key: :_id, foreign_key: :user_id, autosave: true, inverse_of: :user
