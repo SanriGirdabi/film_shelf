@@ -179,14 +179,7 @@ test:
         max_pool_size: 1
 
 production:
-  clients:
+  sessions:
     default:
-      database: film_shelf_production
-      hosts:
-        - mongodb.net:27017
-        - mongodb.net:27018
-      options:
-        user: 'dbUser'
-        password: 'Xm!4NU$X*TkWEKe'     
-        ssl: true
-        ssl_verify: false
+      uri:
+        - mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority
