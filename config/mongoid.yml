@@ -181,5 +181,8 @@ test:
 production:
   clients:
     default:
-      uri:
-        - mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority
+      hosts:
+        - '@cluster0.cat4j.mongodb.net/'
+      user: dbUser
+      password: Xm!4NU$X*TkWEKe
+      database: film_shelf_production
