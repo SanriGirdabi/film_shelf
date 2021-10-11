@@ -92,6 +92,8 @@ end
 - If I find time, I'm thinking to cover more edge cases and error handling on the Backend.
 - Better loggin-in and current_user tracing would be nice. For every session a seperated ```logged_in``` boolean could be the next step.
 - My relations and the app causes a lot of queries, so maybe embedding ```titles``` and the ```names``` collections could be an approach. However in my mind, there is a ```sharding```option, which needs better indexing so I'm leaving it later.
+- For better test cases a seperated test database could be nice!
+- User page takes too long to render, because it is making a lot of queries, again, a better relation with movies and actors can solve this issue!
 
 ## 🤝 Contributing
 
