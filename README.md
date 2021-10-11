@@ -14,6 +14,10 @@ This is a test project that uses [IMDB data](https://datasets.imdbws.com/) with 
 - To get this project up and running locally, you must already have ruby installed on your computer.
 - To run the local database server and connect the  Ruby-driver to the server you need to install [mongod](https://docs.mongodb.com/v4.0/administration/install-community/) on your computer. Please refer the link before continue.
 
+## Live Link
+
+I tried to host on Mongo Atlas but the free membership is limited to 500 MB and it is not enough for this data. Also I tried a lot but couldn't find a solution for ```mongoid.yml``` to see the host option for remote server. I'll try in the future and will share the conclusion here.
+
 
 ## Getting Started
 
@@ -37,6 +41,9 @@ This is a test project that uses [IMDB data](https://datasets.imdbws.com/) with 
 - As you can see there are four rake tasks added. We'll use 3 of them. In the terminal run ```rake convert_titles```, ```rake convert_names```respectively. These will create json files from the tsv files and store them inside the public folder. We'll need them for our [MongoDB](https://www.mongodb.com/) database.
 - Then run ```rake db_creator_custom```. This rake task has two options, I have used both of them. If you wish to have the time-stamps for your records don't change anything in the task, but it'll take more storage from your computer and takes more than 1 day to finish the task. If you don't care about the time-stamps switch the commented and uncommented parts. The task should look like this, you can copy from here and paste into the ```db_creator.rake``` file;<br>
 ``` 
+require 'csv'
+require 'json'
+
 desc 'Create a mongoDB from the json files'
 
 task :db_creator_custom do

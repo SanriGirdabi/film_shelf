@@ -1,7 +1,7 @@
 require 'csv'
 require 'json'
 
-desc 'Create a mongoDB from the json files'
+desc 'Push to cloud'
 
 task :last_db_try do
     client = Mongo::Client.new('mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority')
