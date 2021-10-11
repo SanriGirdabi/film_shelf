@@ -135,7 +135,12 @@ module Types
 
     def featured_movies
       Title.custom_set_collection("titles#{Random.rand(10)}")
-      Title.all.offset(3).limit(10).as_json
+      title = Title.all.offset(3).limit(10).as_json
+      if title
+        title
+      else
+        raise GraphQL::ExecutionError, title.errors.full_messages.join(", ")
+      end
     end
   end
 end
