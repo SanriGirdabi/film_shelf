@@ -179,7 +179,7 @@ test:
         max_pool_size: 1
 
 production:
-  sessions:
+  clients:
     default:
       uri:
         - mongodb+srv://dbUser:Xm!4NU$X*TkWEKe@cluster0.cat4j.mongodb.net/film_shelf_production?retryWrites=true&w=majority
