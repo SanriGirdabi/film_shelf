@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Mutations::AddToFavorites, type: :request do
   let(:email) { 'sercanuygur@gmail.com' }
   let(:password) { '123456789' }
-  let(:session_key) { "4d56172b355ee1dbb6d83c19b1a72366fa6103a3" }
+  let(:session_key) { "6441da06efb3227e162a9b6eb4436fc4dc15a2be" }
   let(:selection) { 'tt1234567' }
 
   describe 'Add to Favorites', type: :mutation do
