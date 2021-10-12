@@ -12,6 +12,7 @@ module Types
     field :favorite_movies, [String], null: true
     field :followed_genres, [String], null: true
     field :favorite_actors, [String], null: true
+    field :user_suggestions, [String], null: true
 
   end
 end

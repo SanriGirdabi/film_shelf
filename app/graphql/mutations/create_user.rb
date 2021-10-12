@@ -6,13 +6,7 @@ class Mutations::CreateUser < Mutations::BaseMutation
 
   def resolve(email:, password:)
     user = User.new(email: email, password: BCrypt::Password.create(password))
-  rescue Mongo::Error::OperationFailure => e
-    if e.message.include? 'E11000'
-      puts "Duplicate key error #{$!}"
-      {}
-    else
-      raise e
-    end
+    'Duplicate key error' if Mongo::Error::OperationFailure
     if user.save
       user
     else

@@ -8,8 +8,14 @@ class Mutations::AddToFavorites < Mutations::BaseMutation
 
   def resolve(session_key:, use_case:, result:, email:)
     if User.is_user_logged_in(session_key)
-      User.where(email: email).update({ '$push': { use_case => result } }) if User.where(email: email).where(use_case: result).to_a.empty?
+      
+      if User.where(email: email).where(use_case.to_sym => result).to_a.empty?
+        user = User.where(email: email)
+        user.update({ '$push': { use_case => result } })
+        user.update({ '$set': { user_suggestions: User.user_suggestions(User.current_user(session_key)) } })
+      end
     end
+
     User.current_user(session_key)
   end
 end
