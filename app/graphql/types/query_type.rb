@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
@@ -5,7 +7,7 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     field :titles, [Types::TitleType],
-          description: 'Return all the titles due to search with partial name, empty search returns all', null: false do
+          description: 'Return all the titles due to search with partial name', null: false do
       argument :originalTitle, String, required: true
     end
 
@@ -27,7 +29,6 @@ module Types
     def title(tconst:)
       result = []
       (0..332).each do |i|
-
         Title.custom_set_collection("titles#{i}")
         tconst.each do |one_tconst|
           result.concat(Title.where(tconst: one_tconst).as_json)
@@ -37,7 +38,7 @@ module Types
     end
 
     field :names, [Types::NameType],
-          description: 'Return all the names due to search with partial name, empty search returns all', null: false do
+          description: 'Return all the names due to search with partial name', null: false do
       argument :primaryName, String, required: true
     end
 
@@ -136,11 +137,7 @@ module Types
     def featured_movies
       Title.custom_set_collection("titles#{Random.rand(10)}")
       title = Title.all.offset(3).limit(10).as_json
-      if title
-        title
-      else
-        raise GraphQL::ExecutionError, title.errors.full_messages.join(", ")
-      end
+      title || raise(GraphQL::ExecutionError, title.errors.full_messages.join(', '))
     end
   end
 end

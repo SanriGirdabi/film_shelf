@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Types
-  class TitleType < Types::BaseObject 
+  class TitleType < Types::BaseObject
     description 'Title and related properties'
 
     field :_id, ID, null: false

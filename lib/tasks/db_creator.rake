@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 desc 'Create a mongoDB from the json files'
 
-task :db_creator_custom => :environment do
+task db_creator_custom: :environment do
   # client = Mongo::Client.new(['127.0.0.1:27017'], database: 'film_shelf_development')
 
   (0..332).each do |i|
-
     titles = JSON.parse(File.read("#{Dir.pwd}/public/title_jsons/title#{i}.json"))
     Title.custom_set_collection("titles#{i}")
     titles.map do |title_hash|

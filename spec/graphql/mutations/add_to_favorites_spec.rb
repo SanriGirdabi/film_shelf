@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::AddToFavorites, type: :request do
   let(:email) { 'sercanuygur@gmail.com' }
   let(:password) { '123456789' }
-  let(:session_key) { "6441da06efb3227e162a9b6eb4436fc4dc15a2be" }
+  let(:session_key) { '6441da06efb3227e162a9b6eb4436fc4dc15a2be' }
   let(:selection) { 'tt1234567' }
 
   describe 'Add to Favorites', type: :mutation do
-
     let(:add_to_fav_string) do
       <<-GQL
         mutation addToFavorites($email: String!, $useCase: String!, $result: String!, $sessionKey: String!) {

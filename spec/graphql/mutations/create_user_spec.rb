@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Mutations::CreateUser, type: :request do
-
-    let(:email) {"sercanuygur70@gmail.com"}
+  let(:email) { 'sercanuygur70@gmail.com' }
 
   describe 'CreateUser', type: :mutation do
     let(:mutation_string) do
@@ -18,7 +19,7 @@ RSpec.describe Mutations::CreateUser, type: :request do
               updatedAt
             }
         }
-    GQL
+      GQL
     end
 
     context 'when user is not created' do
@@ -32,15 +33,14 @@ RSpec.describe Mutations::CreateUser, type: :request do
     end
 
     context 'when user is already created' do
-        before do
-          mutation(mutation_string, variables: variables, context: {})
-        end
-  
-        it 'can not creates user' do
-          expect(gql_response.data['createUser']['sessionKeys']).to be_empty
-        end
+      before do
+        mutation(mutation_string, variables: variables, context: {})
       end
 
+      it 'can not creates user' do
+        expect(gql_response.data['createUser']['sessionKeys']).to be_empty
+      end
+    end
 
     def variables
       {

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'csv'
 require 'json'
 
 desc 'convert title tsv to json'
 
 task :convert_titles do
-
   first = (1..26).zip('a'..'z').to_h
   second = (1..26).zip('a'..'z').to_h
 
@@ -13,7 +14,8 @@ task :convert_titles do
   k = 0
 
   (1..26).each do |i|
-    break if i ==14
+    break if i == 14
+
     (1..26).each do |y|
       break if i == 13 && y == 22
 
@@ -40,8 +42,8 @@ task :convert_titles do
         title_obj
       end
 
-
-      File.write("#{Dir.pwd}/public/title_jsons/title#{k}.json", writable_object_creator(array_of_values, array_of_keys).to_json, mode: 'a')
+      File.write("#{Dir.pwd}/public/title_jsons/title#{k}.json",
+                 writable_object_creator(array_of_values, array_of_keys).to_json, mode: 'a')
       k += 1
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 desc 'Add name ids to titles'
 
 task :title_modifier do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class LoginType < Types::BaseObject
     description 'Login path return values Properties'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class UserType < Types::BaseObject
     description 'User Properties'
@@ -13,6 +15,5 @@ module Types
     field :followed_genres, [String], null: true
     field :favorite_actors, [String], null: true
     field :user_suggestions, [String], null: true
-
   end
 end
