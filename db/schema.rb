@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,33 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_211_103_712) do
+ActiveRecord::Schema.define(version: 2022_02_11_103712) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'actors', force: :cascade do |t|
-    t.string 'nconst'
-    t.string 'primary_name'
-    t.string 'birth_year'
-    t.string 'death_year'
-    t.string 'primary_profession', default: [], array: true
-    t.string 'known_for_titles', default: [], array: true
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "actors", force: :cascade do |t|
+    t.string "nconst"
+    t.string "primary_name"
+    t.string "birth_year"
+    t.string "death_year"
+    t.string "primary_profession", default: [], array: true
+    t.string "known_for_titles", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'movies', force: :cascade do |t|
-    t.string 'tconst'
-    t.string 'title_type'
-    t.string 'primary_title'
-    t.string 'original_title'
-    t.string 'is_adult'
-    t.string 'start_year'
-    t.string 'end_year'
-    t.string 'runtime_minutes'
-    t.string 'genres', default: [], array: true
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.string 'crew', default: [], array: true
+  create_table "movies", force: :cascade do |t|
+    t.string "tconst"
+    t.string "title_type"
+    t.string "primary_title"
+    t.string "original_title"
+    t.string "is_adult"
+    t.string "start_year"
+    t.string "end_year"
+    t.string "runtime_minutes"
+    t.string "genres", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "crew", default: [], array: true
   end
+
 end

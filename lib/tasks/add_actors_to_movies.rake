@@ -8,7 +8,7 @@ task add_actors_to_movies: :environment do
     names.map do |name_hash|
       name_hash['knownForTitles'].split(',').each do |title_id|
         updated_record = Movie.find_by(tconst: title_id)
-        updated_record.crew += [title_id] unless updated_record.nil?
+        updated_record.crew += [name_hash['nconst']] unless updated_record.nil?
         updated_record&.save
       end
     end
