@@ -83,9 +83,9 @@ end
 
 👤 **Eyüp Sercan UYGUR**
 
-- Github: [@eypsrcnuygr](https://github.com/eypsrcnuygr)
-- Twitter: [@eypsrcnuygr](https://twitter.com/eypsrcnuygr)
-- LinkedIn: [eypsrcnuygr](https://www.linkedin.com/in/eypsrcnuygr/)
+- Github: [@eypsrcnuygr](https://github.com/SanriGirdabi)
+- Twitter: [@eypsrcnuygr](https://twitter.com/sanri_girdabi)
+- LinkedIn: [eypsrcnuygr](https://www.linkedin.com/in/srcnuygr/)
 - Email: [Eyüp Sercan UYGUR](sercanuygur@gmail.com)
 
 ## 🤝 Further Words and Future Improvements
