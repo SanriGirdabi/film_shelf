@@ -83,11 +83,6 @@ end
 
 👤 **Eyüp Sercan UYGUR**
 
-- Github: [@SanriGirdabi](https://github.com/SanriGirdabi)
-- Twitter: [@sanri_girdabi](https://twitter.com/sanri_girdabi)
-- LinkedIn: [srcnuygr](https://www.linkedin.com/in/srcnuygr/)
-- Email: [Eyüp Sercan UYGUR](sercanuygur@gmail.com)
-
 ## 🤝 Further Words and Future Improvements
 
 - If I find time, I'm thinking to cover more edge cases and error handling on the Backend. Right now the tests are not well thought and could fail at some circumstances, I'll add more case and make the API stronger for failing conditions in the upcoming days.
