@@ -90,7 +90,7 @@ end
 - My relations and the app causes a lot of queries, so maybe embedding `titles` and the `names` collections could be an approach. However in my mind, there is a `sharding`option, which needs better indexing so I'm leaving it later.
 - For better test cases a seperated test database could be nice!
 - User page takes too long to render, because it is making a lot of queries, again, a better relation with movies and actors can solve this issue!
-- After adding two `genres` to your favorites, the app starts to offer some movies to you. I didn't use any known algorithm because for those algorithms the data needs to be related better and to show in the frontend don't want to make more queries to get the related field. So my approach is one way (from genre to movie) with two axis (movie-genre). Again, in the future if there will be a chance, I can work on the algorithm to make it more advanced and maybe even I can try a content based approach instead of a model based approach.
+- After adding two `genres` to your favorites, the app starts to offer some movies to you. <b>I didn't use any known algorithm because for those algorithms the data needs to be related better and to show in the frontend don't want to make more queries to get the related field. So my approach is one way (from genre to movie) with two axis (movie-genre). Again, in the future if there will be a chance, I can work on the algorithm to make it more advanced and maybe even I can try a content based approach instead of a model based approach.</b>
 
 ## 🤝 Contributing
 
